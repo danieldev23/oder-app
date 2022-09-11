@@ -1,7 +1,9 @@
 import * as React from 'react'
+import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Button, Header, Input } from 'react-native-elements'
 import styled from 'styled-components'
+import {sendPushNotification, getToken} from './api'
 
 const Page = styled(View)`
     padding: 40px 30px 0 30px;
@@ -38,31 +40,44 @@ const SummonButtonText = styled(Text)`
     color: white;
     font-size: 16px;
 `
+
+
 const GirlScreen: React.FC = () => {
+      const [tokenInput, setTokenInput] = React.useState('')
+      const [token, setToken] = React.useState<Token | undefined>()
   return (
     <View>
       <Header centerComponent={{ text: 'Cho bạn nữ 👧', style: { color: '#fff' } }} />
+      {token ? (<View>
+        <Heading>Mã số của anh niu là: {token.id}.</Heading>
+        <Heading>Có thể kết nối!</Heading>
+      </View>) : (
       <View>
-        <Input label='Mã số của bạn nam ' placeholder='Nhập tài khoản của Crush!' />
-        <Button style={styles.container} title="Xác nhận mã số" />
+        <Input label='Mã số của bạn nam ' placeholder='Nhập tài khoản của Crush!' value={tokenInput} onChangeText={setTokenInput}/>
+        <Button style={styles.container} title="Xác nhận mã số" onPress={async () => {
+          const storedToken = await getToken(tokenInput)
+          setToken(storedToken)
+        }}/>
       </View>
-      <View style={{ marginTop: 30 }} >
-        <Heading>Anh ơiiii!</Heading>
+      )}
+          {token &&        <View style={{ marginTop: 30 }} >
+        <Heading>Anh Huyy ơiiii!</Heading>
         <ButtonContainer>
-          <SummonButton color="#e74c3c">
-            <SummonButtonText>Em muốn đi chơi &#128523;</SummonButtonText>
+          <SummonButton color="#e74c3c" onPress={() => sendPushNotification(token.token, 'Em muốn đi chơi😙', 'Đi chơi chứ ở nhà chán lắm🤭')}>
+            <SummonButtonText> &#128523; Em muốn đi chơi</SummonButtonText>
           </SummonButton>
-          <SummonButton color="#2980b9">
-            <SummonButtonText>Anh đẹp trai wa &#128521;</SummonButtonText>
+          <SummonButton color="#2980b9" onPress={() => sendPushNotification(token.token, 'Em thèm trà sữa🧋', '😉Cho em 1 cốc matcha đá xay nhầm ánh mắt của anh')}>
+            <SummonButtonText>Em thèm trà sữa 🧋</SummonButtonText>
           </SummonButton>
-          <SummonButton color="#2ecc71">
-            <SummonButtonText>Iu anh nhìu lắm ❤️</SummonButtonText>
+          <SummonButton color="#2ecc71" onPress={() => sendPushNotification(token.token, 'Em iu anh nhìu nhắm🥰!', '')}>
+            <SummonButtonText>❤️ Iu anh nhìu lắm</SummonButtonText>
           </SummonButton>
-          <SummonButton color="#f1c40f">
-            <SummonButtonText>Ting ting anh ơi 📱</SummonButtonText>
+          <SummonButton color="#f1c40f" onPress={() => sendPushNotification(token.token, '📱Call hong anh', 'Bé call cho anh nhó😗')}>
+            <SummonButtonText>Call nha anh iu 📱</SummonButtonText>
           </SummonButton>
         </ButtonContainer>
-      </View>
+      </View>}
+
 
     </View>
   )
