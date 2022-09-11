@@ -15,6 +15,23 @@ font-size: 20px;
 margin-bottom: 16px;
 font-weight: bold;
 `
+const HeadingTop = styled(Text)`
+text-align: center;
+font-size: 24px;
+color: white;
+// font-family: monospace;
+margin-bottom: 16px;
+// font-weight: bold;
+background-color: rgb(32, 137, 220);
+`
+const CopyRight = styled(Text)`
+text-align: center;
+font-size: 10px;
+color: white;
+margin-bottom: 2px;
+margin-top: 147%;
+font-weight: bold;
+`
 async function getNotificationToken() {
   const { status } = await Notifications.getPermissionsAsync()
   if (status != 'granted') {
@@ -36,7 +53,9 @@ const BoyScreen: React.FC = () => {
   const [token, setToken] = React.useState<Token | undefined>()
   return (
     <View>
-      <Header centerComponent={{ text: 'Cho bạn nam 👦', style: { color: '#fff' } }} />
+      <HeadingTop>👦</HeadingTop>
+
+
       <Page>
         <Heading>{token ? `Mã số của bạn là ${token.id}.` :
           'Bạn chưa có mã số, bấm vào đây để lấy mã'}</Heading>
@@ -48,6 +67,7 @@ const BoyScreen: React.FC = () => {
             setToken(storedToken)
           }
         }} />
+        <CopyRight style={{marginBottom: 5}}>Developed by Đặng Quốc Huy</CopyRight>
       </Page>
     </View>
   )

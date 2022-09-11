@@ -40,17 +40,26 @@ const SummonButtonText = styled(Text)`
     color: white;
     font-size: 16px;
 `
-
+const HeaderContent = styled(Header)`
+    width: 10px;
+`
+const HeadingTop = styled(Text)`
+text-align: center;
+font-size: 24px;
+color: white;
+margin-bottom: 16px;
+background-color: rgb(32, 137, 220);
+`
 
 const GirlScreen: React.FC = () => {
       const [tokenInput, setTokenInput] = React.useState('')
       const [token, setToken] = React.useState<Token | undefined>()
   return (
     <View>
-      <Header centerComponent={{ text: 'Cho bạn nữ 👧', style: { color: '#fff' } }} />
+      <HeadingTop>👧</HeadingTop>
       {token ? (<View>
-        <Heading>Mã số của anh niu là: {token.id}.</Heading>
-        <Heading>Có thể kết nối!</Heading>
+        <Heading>👦Mã số của anh niu là: {token.id}.</Heading>
+        <Heading>Sẵn sàng kết nối📶!</Heading>
       </View>) : (
       <View>
         <Input label='Mã số của bạn nam ' placeholder='Nhập tài khoản của Crush!' value={tokenInput} onChangeText={setTokenInput}/>
@@ -60,8 +69,8 @@ const GirlScreen: React.FC = () => {
         }}/>
       </View>
       )}
-          {token &&        <View style={{ marginTop: 30 }} >
-        <Heading>Anh Huyy ơiiii!</Heading>
+          {token &&  <View style={{ marginTop: 30 }} >
+        <Heading>🥰Anh iu ơiiii!</Heading>
         <ButtonContainer>
           <SummonButton color="#e74c3c" onPress={() => sendPushNotification(token.token, 'Em muốn đi chơi😙', 'Đi chơi chứ ở nhà chán lắm🤭')}>
             <SummonButtonText> &#128523; Em muốn đi chơi</SummonButtonText>
@@ -70,10 +79,16 @@ const GirlScreen: React.FC = () => {
             <SummonButtonText>Em thèm trà sữa 🧋</SummonButtonText>
           </SummonButton>
           <SummonButton color="#2ecc71" onPress={() => sendPushNotification(token.token, 'Em iu anh nhìu nhắm🥰!', '')}>
-            <SummonButtonText>❤️ Iu anh nhìu lắm</SummonButtonText>
+            <SummonButtonText>😘 Em nhớ anh quá!</SummonButtonText>
           </SummonButton>
           <SummonButton color="#f1c40f" onPress={() => sendPushNotification(token.token, '📱Call hong anh', 'Bé call cho anh nhó😗')}>
             <SummonButtonText>Call nha anh iu 📱</SummonButtonText>
+          </SummonButton>
+          <SummonButton color="#FF9551">
+            <SummonButtonText></SummonButtonText>
+          </SummonButton>
+          <SummonButton color="#E15FED">
+            <SummonButtonText></SummonButtonText>
           </SummonButton>
         </ButtonContainer>
       </View>}
@@ -85,6 +100,7 @@ const GirlScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     marginBottom: '4px',
-  }
+  },
+
 })
 export default GirlScreen

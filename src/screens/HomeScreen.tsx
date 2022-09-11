@@ -10,8 +10,8 @@ const Tab = createBottomTabNavigator();
 const HomeScreen: React.FC = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Trai Tài" options={{ tabBarIcon: () => <Text>👦</Text> }} component={BoyScreen} />
-      <Tab.Screen name="Gái Sắc" options={{ tabBarIcon: () => <Text>👧</Text> }} component={GirlScreen} />
+      <Tab.Screen name="Handsome Boy" options={{ tabBarIcon: () => <Text>👦</Text> }} component={BoyScreen} />
+      <Tab.Screen name="Beautiful Girl" options={{ tabBarIcon: () => <Text>👧</Text> }} component={GirlScreen} />
     </Tab.Navigator>
   )
 }
